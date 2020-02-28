@@ -27,9 +27,27 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
+
+--	A token (json web token) are issued by the server, and are strings of cryptic text which can be stored on the client-side using local storage or session storage. They can be used as authentication tokens, and then you can therefore set permissions for certain users on your site. (example – a user must login with correct credentials in order to see their profile). 
+
 - [ ] What steps can you take in your web apps to keep your data secure?
+
+--	You can issue tokens to users only who login with correct credentials, and then that user (depending on user type, and permissions set up for that specific user type) can only see/change data that they are allowed to as their given user type. Setting up private routes where you must authenticate that token is a way to do so.
+
 - [ ] Describe how web servers work.
+
+--	“Web server” can mean a computer that stores the code for a website, or a program that runs on that computer. The physical computer called a web server is connected to the internet, and stores the code for a different website to be shared across the world at all times. The software program that the server itself will “host” as a website/application is also called a web server. The main purpose of it is to serve web pages from code upon user request.
+In general, computers can connect to the internet via the world wide web, locate a specific server computer through a URL and domain name, and retrieve information or resources from that server.
+
+
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+-	C – POST data to an api to create a new item
+  R – GET data from an api to read
+  U – PUT update data that is already existing in the api, with new data
+  D – DELETE data from the api
+
+
 
 
 ## Project Set Up

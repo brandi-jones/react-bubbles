@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 const initialColor = {
   color: "",
@@ -25,6 +26,15 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(response => {
+        console.log(response);
+        updateColors();
+      })
+      .catch(error => {
+        console.log("Error deleting movie:", error)
+      })
   };
 
   return (
@@ -34,6 +44,7 @@ const ColorList = ({ colors, updateColors }) => {
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
+              {console.log("color in COLORLIST: ", color)}
               <span className="delete" onClick={e => {
                     e.stopPropagation();
                     deleteColor(color)

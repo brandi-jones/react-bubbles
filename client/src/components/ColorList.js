@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {axiosWithAuth} from '../utils/axiosWithAuth';
+import AddColorForm from './AddColorForm';
 
 const initialColor = {
   color: "",
@@ -18,13 +20,33 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
+    console.log("color to edit in save edit: ", colorToEdit)
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(response => {
+        console.log(response);
+        updateColors();
+      })
+      .catch(error => {
+        console.log("Error editing color: ", error)
+      })
+
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(response => {
+        console.log(response);
+        updateColors();
+      })
+      .catch(error => {
+        console.log("Error deleting color:", error)
+      })
   };
 
   return (
@@ -34,6 +56,7 @@ const ColorList = ({ colors, updateColors }) => {
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
+              {console.log("color in COLORLIST: ", color)}
               <span className="delete" onClick={e => {
                     e.stopPropagation();
                     deleteColor(color)
@@ -82,6 +105,7 @@ const ColorList = ({ colors, updateColors }) => {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+      <AddColorForm colorList={colors} updateColors={updateColors}/>
     </div>
   );
 };
